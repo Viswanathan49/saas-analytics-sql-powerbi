@@ -65,6 +65,13 @@ This project implements a **SaaS business analytics platform** built around thre
 
 ---
 
+## Business Questions Answered
+
+- How is MRR trending by plan over time?
+- What is our churn rate, and which plans churn most?
+- How many active customers do we have by plan each month?
+- What are CAC, payback period, and tenure at churn by plan and customer segment?
+
 ## Tech Stack
 
 | Layer | Technology |
