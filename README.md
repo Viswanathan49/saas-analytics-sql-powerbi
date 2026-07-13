@@ -2,7 +2,6 @@
 
 A full end-to-end analytics pipeline for a SaaS business — because spreadsheets are for people who enjoy suffering. It ingests raw CSV data, loads it into a PostgreSQL data warehouse, transforms it into a star-schema model, creates analytical SQL views, and surfaces everything in a Power BI report with four dashboards.
 
-This project simulates a subscription-based SaaS business and shows how to build an end‑to‑end analytics solution from raw CSVs to a production‑style Power BI dashboard using SQL and Python.
 ---
 
 ## Table of Contents
