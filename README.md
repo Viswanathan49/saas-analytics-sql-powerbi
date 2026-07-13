@@ -38,6 +38,13 @@ This project implements a **SaaS business analytics platform** built around thre
 4. **Analyse** — SQL views compute business KPIs on top of the star schema.
 5. **Visualise** — Power BI connects directly to the views and tables to serve four interactive report pages.
 
+## Skills Demonstrated
+
+- SQL data modeling and analytics (star schema, analytical views for MRR, churn, active customers, unit economics).
+- Python ETL pipeline (CSV ingestion, Postgres loads, dimensional modeling with `pandas` and SQLAlchemy).
+- Power BI semantic modeling (TMDL tables, relationships, measures) and dashboard design across four SaaS KPI pages.
+- Configuration-driven development (`config_dev.yaml` for environment & connections) and reproducible project structure using Git.
+
 ### Dashboard Preview
 
 **Page 1 — Executive Overview**
