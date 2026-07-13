@@ -38,6 +38,24 @@ This project implements a **SaaS business analytics platform** built around thre
 4. **Analyse** — SQL views compute business KPIs on top of the star schema.
 5. **Visualise** — Power BI connects directly to the views and tables to serve four interactive report pages.
 
+### Dashboard Preview
+
+**Page 1 — Executive Overview**
+
+![Executive Overview Dashboard](img/1.png)
+
+**Page 2 — Revenue & Plan Analytics**
+
+![Revenue & Plan Analytics Dashboard](img/2.png)
+
+**Page 3 — Churn & Retention Deep-Dive**
+
+![Churn & Retention Deep-Dive Dashboard](img/3.png)
+
+**Page 4 — Customer Economics**
+
+![Customer Economics Dashboard](img/4.png)
+
 ---
 
 ## Tech Stack
@@ -268,15 +286,11 @@ The report contains **four pages**, all styled with a dark background (`#0B111E`
 
 Top-level KPIs at a glance: Total MRR, Active Customers, Churn Rate, and ARPU. Designed as the landing page for stakeholders who want the headline numbers without digging through the details.
 
-![Executive Overview Dashboard](img/1.png)
-
 ---
 
 #### Page 2 — Revenue & Plan Analytics
 
 Breaks down MRR trends over time by plan type, shows month-over-month growth (with the `MoM Growth Indicator` arrow label), and visualises plan mix distribution across the customer base.
-
-![Revenue & Plan Analytics Dashboard](img/2.png)
 
 ---
 
@@ -284,15 +298,11 @@ Breaks down MRR trends over time by plan type, shows month-over-month growth (wi
 
 Monthly churn counts and churn rate trended over time, segmented by plan type. Includes a reference line for the 5% `Churn Target %` benchmark to quickly flag months where churn exceeded the threshold.
 
-![Churn & Retention Deep-Dive Dashboard](img/3.png)
-
 ---
 
 #### Page 4 — Customer Economics
 
 Per-customer unit economics: Average CAC, CAC Payback period in months, and average tenure at churn in days. Helps evaluate the long-term profitability and sustainability of each plan segment.
-
-![Customer Economics Dashboard](img/4.png)
 
 ---
 
