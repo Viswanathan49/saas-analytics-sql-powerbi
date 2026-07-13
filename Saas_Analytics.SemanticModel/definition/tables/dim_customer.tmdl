@@ -1,0 +1,103 @@
+table dim_customer
+	lineageTag: 279beaf7-89ad-468c-a11f-61564c08421f
+
+	column customer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 8d9f2f0a-260c-4875-bb85-de69ad3ab5d5
+		summarizeBy: none
+		sourceColumn: customer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e7e126c-cfd0-4505-b76b-6c0f0c9d771a
+		summarizeBy: sum
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column signup_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4982ad89-ebe2-4cb7-8929-62e76eeb7eed
+		summarizeBy: none
+		sourceColumn: signup_date
+
+		variation Variation
+			isDefault
+			relationship: dff826ff-bce0-4b68-a739-e0548fe2eefd
+			defaultHierarchy: LocalDateTable_a5c72c9a-0e8e-4bef-a48a-603f066541fc.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column plan_type
+		dataType: string
+		lineageTag: 949b9e56-9bd1-4bf8-b49b-fc1d32a50e6a
+		summarizeBy: none
+		sourceColumn: plan_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column monthly_fee
+		dataType: double
+		lineageTag: c9e250bc-929e-4dc1-a94b-1d42a664f7c9
+		summarizeBy: sum
+		sourceColumn: monthly_fee
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column acquisition_cost
+		dataType: double
+		lineageTag: 6485a6d2-44cb-4b6c-8d7f-cfdeb0246184
+		summarizeBy: sum
+		sourceColumn: acquisition_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column churn_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 85a314f6-0fcf-4e8a-a78d-0e48725e80af
+		summarizeBy: none
+		sourceColumn: churn_date
+
+		variation Variation
+			isDefault
+			relationship: bb432920-67e5-4aef-b5ef-286be8388901
+			defaultHierarchy: LocalDateTable_03c9e190-55f1-4d54-b7e4-2e49789d0475.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column is_churned
+		dataType: int64
+		formatString: 0
+		lineageTag: 1258f4af-b1ef-4c73-b4f5-893d0a963ade
+		summarizeBy: sum
+		sourceColumn: is_churned
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_customer = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "saas_analytics"),
+				    public_dim_customer = Source{[Schema="public",Item="dim_customer"]}[Data]
+				in
+				    public_dim_customer
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

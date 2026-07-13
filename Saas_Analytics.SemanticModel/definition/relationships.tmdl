@@ -1,0 +1,59 @@
+relationship dff826ff-bce0-4b68-a739-e0548fe2eefd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_customer.signup_date
+	toColumn: LocalDateTable_a5c72c9a-0e8e-4bef-a48a-603f066541fc.Date
+
+relationship bb432920-67e5-4aef-b5ef-286be8388901
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_customer.churn_date
+	toColumn: LocalDateTable_03c9e190-55f1-4d54-b7e4-2e49789d0475.Date
+
+relationship 7e0deb2c-de75-4ab1-aa0d-20c04fb90fc0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_date.date
+	toColumn: LocalDateTable_890c5626-76b3-42c5-95de-6ddfe65e9734.Date
+
+relationship 8b0fa186-b886-478c-a043-f5f37aad60d6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_revenue.month
+	toColumn: LocalDateTable_caaeb8e1-7398-40b0-8c0f-24142f88bdbc.Date
+
+relationship e7b65bdb-5370-4740-aa6c-4b95ed22dfdb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_subscription.month
+	toColumn: LocalDateTable_0fb1ab1e-5e84-41d0-bce4-1d8e978316dc.Date
+
+relationship 8c119f2d-faf5-4713-b156-cee113113270
+	fromColumn: fact_subscription.customer_key
+	toColumn: dim_customer.customer_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship b1bf638a-d0e9-40d1-a20e-86a83331bf32
+	fromColumn: fact_subscription.month_key
+	toColumn: dim_date.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 0da02892-8507-403c-ab0f-dc9aafeaf061
+	joinOnDateBehavior: datePartOnly
+	fromColumn: vw_customer_economics.signup_date
+	toColumn: LocalDateTable_62aec467-5656-4c4c-83f3-7a8e076ccbce.Date
+
+relationship 566cae49-fecd-4288-a93e-737317b80594
+	joinOnDateBehavior: datePartOnly
+	fromColumn: vw_customer_economics.churn_date
+	toColumn: LocalDateTable_a291f9d2-81cc-4a78-809a-70209715224d.Date
+
+relationship 4b99d5dc-cab4-1832-48b4-731bbccb06f6
+	fromColumn: vw_monthly_churn_by_plan.year_month
+	toColumn: dim_date.year_month
+
+relationship 98525f1c-41e2-d178-64d3-daae5349beb4
+	fromColumn: vw_monthly_mrr_by_plan.year_month
+	toColumn: dim_date.year_month
+
+relationship 3782e8da-33c8-b9b4-0cb2-e13b3091909d
+	fromColumn: vw_monthly_active_customers.year_month
+	toColumn: dim_date.year_month
+

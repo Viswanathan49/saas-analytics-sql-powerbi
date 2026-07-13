@@ -1,0 +1,4 @@
+**/.pbi/
+logs/
+__pycache__/
+*.pyc

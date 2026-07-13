@@ -1,0 +1,131 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 212.36558472123079,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1453.5516038462656,
+            "y": 41.530354019932361
+          },
+          "nodeIndex": "_Measures",
+          "nodeLineageTag": "39974101-3924-4516-98ca-82ccdc970085",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 11.060708039864735,
+            "y": 544.16991374814529
+          },
+          "nodeIndex": "dim_customer",
+          "size": {
+            "height": 303.60202297104206,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 468.53133451936287,
+            "y": 131.37289458146779
+          },
+          "nodeIndex": "dim_date",
+          "size": {
+            "height": 231.90050574276052,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1036.7197160287033,
+            "y": 331.12498555155383
+          },
+          "nodeIndex": "fact_revenue",
+          "size": {
+            "height": 294.12141607972956,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 13.694348377124925,
+            "y": 91.911121406133987
+          },
+          "nodeIndex": "fact_subscription",
+          "size": {
+            "height": 244.5413149311774,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1318.0811118101635,
+            "y": 323.90219823034607
+          },
+          "nodeIndex": "vw_customer_economics",
+          "size": {
+            "height": 308.64080918841682,
+            "width": 298.78414709063622
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 752.79435604155674,
+            "y": 478.0580799692454
+          },
+          "nodeIndex": "vw_monthly_active_customers",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 263.188943543286,
+            "y": 573.67100319125484
+          },
+          "nodeIndex": "vw_monthly_churn_by_plan",
+          "size": {
+            "height": 152,
+            "width": 303.52445053629265
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1086.8906590431379,
+            "y": 102.80474128050369
+          },
+          "nodeIndex": "vw_monthly_mrr_by_plan",
+          "size": {
+            "height": 152,
+            "width": 290.88364134787571
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 63.2870877232341,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

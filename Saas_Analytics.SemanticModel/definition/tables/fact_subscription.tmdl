@@ -1,0 +1,77 @@
+table fact_subscription
+	lineageTag: 5fb8fa5e-dcf3-40fb-9160-474c3a0afc3b
+
+	column subscription_key
+		dataType: int64
+		formatString: 0
+		lineageTag: ae694537-1e3e-4191-8e15-6a281e8d3110
+		summarizeBy: sum
+		sourceColumn: subscription_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column subscription_id
+		dataType: string
+		lineageTag: 5b112b11-104f-4198-97bf-c751eb2ea7ed
+		summarizeBy: none
+		sourceColumn: subscription_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 07b2ac24-8683-482a-a6c2-ac020d2c33ca
+		summarizeBy: none
+		sourceColumn: customer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 9766df95-b9c0-46c8-9bec-bf42fefde642
+		summarizeBy: none
+		sourceColumn: month_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4eefea4b-d3ad-4cc4-b6bb-129fb1f11764
+		summarizeBy: none
+		sourceColumn: month
+
+		variation Variation
+			isDefault
+			relationship: e7b65bdb-5370-4740-aa6c-4b95ed22dfdb
+			defaultHierarchy: LocalDateTable_0fb1ab1e-5e84-41d0-bce4-1d8e978316dc.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column monthly_fee
+		dataType: double
+		lineageTag: 3102e6e3-5c18-494e-9f39-53bc14c753c9
+		summarizeBy: sum
+		sourceColumn: monthly_fee
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fact_subscription = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "saas_analytics"),
+				    public_fact_subscription = Source{[Schema="public",Item="fact_subscription"]}[Data]
+				in
+				    public_fact_subscription
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,41 @@
+table vw_monthly_churn_by_plan
+	lineageTag: dfb0b73b-405d-44dd-b050-41b8124f22f9
+
+	column year_month
+		dataType: string
+		lineageTag: 92fa3d1f-3ee2-4934-ae1f-286ee4c4e11c
+		summarizeBy: none
+		sourceColumn: year_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column plan_type
+		dataType: string
+		lineageTag: a03b1540-72e2-41a5-981d-a15d8e47ecbb
+		summarizeBy: none
+		sourceColumn: plan_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column churned_customers
+		dataType: int64
+		formatString: 0
+		lineageTag: f6868b81-a698-4748-bf4a-15c1cbb09aa6
+		summarizeBy: sum
+		sourceColumn: churned_customers
+
+		annotation SummarizationSetBy = Automatic
+
+	partition vw_monthly_churn_by_plan = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "saas_analytics"),
+				    public_vw_monthly_churn_by_plan = Source{[Schema="public",Item="vw_monthly_churn_by_plan"]}[Data]
+				in
+				    public_vw_monthly_churn_by_plan
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

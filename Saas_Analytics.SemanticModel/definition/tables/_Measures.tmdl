@@ -1,0 +1,113 @@
+table _Measures
+	lineageTag: 39974101-3924-4516-98ca-82ccdc970085
+
+	measure 'Total MRR' = SUM(vw_monthly_mrr_by_plan[mrr])
+		lineageTag: f46b50c4-742a-4278-9cfa-c10b9ee89aac
+
+	measure 'Current MRR' =
+			
+			CALCULATE(
+			[Total MRR],
+			FILTER(ALL(dim_date), dim_date[date] = MAX(dim_date[date]))
+			)
+		lineageTag: 76cff2ae-45f1-402c-87d6-7e076de7f7e1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Prior Month MRR' =
+			
+			CALCULATE(
+			    [Total MRR],
+			    DATEADD(dim_date[date], -1, MONTH)
+			)
+		lineageTag: 9480efdd-cca1-41a0-95c8-f70a733e5c8d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MoM MRR Growth %' =
+			
+			DIVIDE([Total MRR] - [Prior Month MRR], [Prior Month MRR])
+		lineageTag: af0e29f7-a4dc-4266-aca6-969565bfb1f3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Active Customers' =
+			
+			SUM ( vw_monthly_active_customers[active_customers] )
+		formatString: 0
+		lineageTag: 904b41e8-47a3-43f0-8491-5e5a8b4848de
+
+	measure 'Total Churned' = SUM(vw_monthly_churn_by_plan[churned_customers])
+		formatString: 0
+		lineageTag: 1b7fec80-368e-44fc-9c8f-d11a6985e1a5
+
+	measure 'Churn Rate %' =
+			
+			DIVIDE([Total Churned], [Active Customers])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 4e92c94e-6c2a-4e48-81b0-f93ca5af1bdc
+
+	measure ARPU = DIVIDE([Total MRR], [Active Customers])
+		lineageTag: fcecb654-d003-421b-bff4-961deb8c976b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Plan Mix %' =
+			
+			DIVIDE ( [Active Customers], [Total Active Customers] )
+		lineageTag: 5a36a920-ab99-443d-abcb-dca3f34e7ec4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg CAC' = AVERAGE(vw_customer_economics[acquisition_cost])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: c2aba648-0361-4bd6-b22c-88cc4bf8fcac
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Avg CAC Payback (Months)' = AVERAGE(vw_customer_economics[cac_payback_months])
+		formatString: 0.0
+		lineageTag: 3e4ebf17-5782-4abc-89dd-8dcb4eebc19e
+
+	measure 'Avg Tenure at Churn (Days)' =
+			
+			CALCULATE(
+			    AVERAGE(vw_customer_economics[tenure_days_at_churn]),
+			    vw_customer_economics[is_churned] = 1
+			)
+		lineageTag: ae83159e-ae21-4737-98ec-0c000405e9c4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MoM Growth Indicator' =
+			
+			VAR g = [MoM MRR Growth %]
+			RETURN IF(g >= 0, "▲ " & FORMAT(g, "0.0%"), "▼ " & FORMAT(g, "0.0%"))
+		lineageTag: 050131bb-b6c2-45f7-a9bb-b205fcc1087b
+
+	measure 'Churn Target %' = 0.05
+		lineageTag: d1f448c2-d30f-4709-a108-2f26beb443a1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Active Customers' =
+			
+			CALCULATE ([Active Customers],ALL ( vw_monthly_active_customers[plan_type] ))
+		formatString: 0
+		lineageTag: 6baeccc3-03b8-4039-83ab-ffb66d533b92
+
+	column Value
+		formatString: 0
+		lineageTag: ed4b224f-e44e-4a47-9759-8a388cdf4fcc
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = calculated
+		mode: import
+		source = {BLANK()}
+
+	annotation PBI_Id = 37af156b66644c3088fccdc7a4c0c2dc
+

@@ -1,0 +1,39 @@
+table vw_monthly_active_customers
+	lineageTag: 4317e6aa-6e91-4d83-830a-c79d642e9781
+
+	column year_month
+		dataType: string
+		lineageTag: d4ae2dca-8dfd-40f3-b75d-c32cb6265956
+		summarizeBy: none
+		sourceColumn: year_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column plan_type
+		dataType: string
+		lineageTag: 63e018d5-ce99-4512-a40a-d7d31bcd94ec
+		summarizeBy: none
+		sourceColumn: plan_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column active_customers
+		dataType: int64
+		formatString: 0
+		lineageTag: 266ccfb2-6d84-45ad-bfc4-d6ab779c4ed0
+		summarizeBy: sum
+		sourceColumn: active_customers
+
+		annotation SummarizationSetBy = Automatic
+
+	partition vw_monthly_active_customers = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "saas_analytics"),
+				    public_vw_monthly_active_customers = Source{[Schema="public",Item="vw_monthly_active_customers"]}[Data]
+				in
+				    public_vw_monthly_active_customers
+
+	changedProperty = Name
+

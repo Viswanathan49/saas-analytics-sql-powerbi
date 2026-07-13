@@ -1,0 +1,42 @@
+table vw_monthly_mrr_by_plan
+	lineageTag: 75e7ecdb-b542-4bc4-8e2b-80f27a11d580
+
+	column year_month
+		dataType: string
+		lineageTag: 162d9fae-cdd9-41b6-b626-a48d0480e006
+		summarizeBy: none
+		sourceColumn: year_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column plan_type
+		dataType: string
+		lineageTag: 72b4acf1-f289-40b9-8da1-b75e66dca764
+		summarizeBy: none
+		sourceColumn: plan_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column mrr
+		dataType: double
+		lineageTag: 71904cff-1ad6-4429-aecf-cd7e20bd24f9
+		summarizeBy: sum
+		sourceColumn: mrr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition vw_monthly_mrr_by_plan = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "saas_analytics"),
+				    public_vw_monthly_mrr_by_plan = Source{[Schema="public",Item="vw_monthly_mrr_by_plan"]}[Data]
+				in
+				    public_vw_monthly_mrr_by_plan
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,219 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "f032b56e2fd6aff04a97",
+  "position": {
+    "x": 27.90705596797774,
+    "y": 427.90819150899205,
+    "z": 6000,
+    "height": 281.3961476771089,
+    "width": 595.35052731685846,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "vw_customer_economics"
+                    }
+                  },
+                  "Property": "customer_id"
+                }
+              },
+              "queryRef": "Sum(vw_customer_economics.customer_id)",
+              "nativeQueryRef": "Customer ID",
+              "displayName": "Customer ID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "vw_customer_economics"
+                    }
+                  },
+                  "Property": "plan_type"
+                }
+              },
+              "queryRef": "vw_customer_economics.plan_type",
+              "nativeQueryRef": "Plan Type",
+              "displayName": "Plan Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "vw_customer_economics"
+                    }
+                  },
+                  "Property": "signup_date"
+                }
+              },
+              "queryRef": "vw_customer_economics.signup_date",
+              "nativeQueryRef": "Signup Date",
+              "displayName": "Signup Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "vw_customer_economics"
+                    }
+                  },
+                  "Property": "churn_date"
+                }
+              },
+              "queryRef": "vw_customer_economics.churn_date",
+              "nativeQueryRef": "Churn Date",
+              "displayName": "Churn Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "vw_customer_economics"
+                    }
+                  },
+                  "Property": "tenure_days_at_churn"
+                }
+              },
+              "queryRef": "Sum(vw_customer_economics.tenure_days_at_churn)",
+              "nativeQueryRef": "Tenure Days at Churn",
+              "displayName": "Tenure Days at Churn"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "vw_customer_economics"
+                  }
+                },
+                "Property": "tenure_days_at_churn"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "136D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "vw_customer_economics.signup_date"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnFormatting": [
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Left'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(vw_customer_economics.customer_id)"
+          }
+        },
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Left'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "vw_customer_economics.plan_type"
+          }
+        },
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "vw_customer_economics.signup_date"
+          }
+        },
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "vw_customer_economics.churn_date"
+          }
+        },
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(vw_customer_economics.tenure_days_at_churn)"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

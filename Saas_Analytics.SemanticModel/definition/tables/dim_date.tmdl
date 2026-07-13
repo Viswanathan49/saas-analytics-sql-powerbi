@@ -1,0 +1,76 @@
+table dim_date
+	lineageTag: 705ffa46-daa5-4f89-9460-750f84f3d8d4
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 073c95d8-1332-41ea-9668-cb2e070ba5b1
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 88b835de-df7d-4f61-b192-c03253f94730
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: 7e0deb2c-de75-4ab1-aa0d-20c04fb90fc0
+			defaultHierarchy: LocalDateTable_890c5626-76b3-42c5-95de-6ddfe65e9734.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: fcb1dbba-069b-4ab9-9ca7-c506722604c0
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		lineageTag: 73915b32-ed53-4c59-b79b-45ca4840fa0a
+		summarizeBy: sum
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column day
+		dataType: int64
+		formatString: 0
+		lineageTag: e02bca0e-6343-42cc-804d-ea94be18d7ce
+		summarizeBy: sum
+		sourceColumn: day
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_month
+		dataType: string
+		lineageTag: 8617878d-4f22-4728-9986-0f9abda1a798
+		summarizeBy: none
+		sourceColumn: year_month
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "saas_analytics"),
+				    public_dim_date = Source{[Schema="public",Item="dim_date"]}[Data]
+				in
+				    public_dim_date
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,150 @@
+table vw_customer_economics
+	lineageTag: b33a80f5-6814-4cbb-81d0-45ef064d91e5
+
+	column customer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6b64cee0-846d-45f9-9151-5c9781bae081
+		summarizeBy: sum
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column plan_type
+		dataType: string
+		lineageTag: 502d2434-24b1-4935-99fc-3a251355dbfa
+		summarizeBy: none
+		sourceColumn: plan_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column monthly_fee
+		dataType: double
+		lineageTag: a007c47f-b015-48ab-b1e6-f6c53c6ff70d
+		summarizeBy: sum
+		sourceColumn: monthly_fee
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column acquisition_cost
+		dataType: double
+		lineageTag: f1e01d2a-6d89-4ee2-bb06-1314cb8b294d
+		summarizeBy: sum
+		sourceColumn: acquisition_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column signup_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f9d7a870-3dfe-4724-8dff-1a9511a4850c
+		summarizeBy: none
+		sourceColumn: signup_date
+
+		variation Variation
+			isDefault
+			relationship: 0da02892-8507-403c-ab0f-dc9aafeaf061
+			defaultHierarchy: LocalDateTable_62aec467-5656-4c4c-83f3-7a8e076ccbce.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column churn_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5c996883-6e5c-4011-b9a8-995b922af5db
+		summarizeBy: none
+		sourceColumn: churn_date
+
+		variation Variation
+			isDefault
+			relationship: 566cae49-fecd-4288-a93e-737317b80594
+			defaultHierarchy: LocalDateTable_a291f9d2-81cc-4a78-809a-70209715224d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column is_churned
+		dataType: int64
+		formatString: 0
+		lineageTag: 2fc6bb90-2f2b-4739-a089-6cd391a7135c
+		summarizeBy: sum
+		sourceColumn: is_churned
+
+		annotation SummarizationSetBy = Automatic
+
+	column cac_payback_months
+		dataType: double
+		lineageTag: d5e6c1c8-1a74-4144-9844-2ba11292f8a4
+		summarizeBy: sum
+		sourceColumn: cac_payback_months
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column tenure_days_at_churn
+		dataType: int64
+		formatString: 0
+		lineageTag: 02ccc26e-cf0d-4af1-b5e8-09e892e7f74c
+		summarizeBy: sum
+		sourceColumn: tenure_days_at_churn
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"vw_customer_economics","TableItemName":"tenure_days_at_churn (bins)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column 'tenure_days_at_churn (bins)' =
+			IF(
+				ISBLANK('vw_customer_economics'[tenure_days_at_churn]),
+				BLANK(),
+				INT('vw_customer_economics'[tenure_days_at_churn] / 42) * 42
+			)
+		formatString: 0
+		lineageTag: 8ea14a5c-48b0-4f4a-9e28-ba594e6a0725
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "vw_customer_economics"
+				          }
+				        },
+				        "Property": "tenure_days_at_churn"
+				      }
+				    }
+				  ],
+				  "binningMetadata": {
+				    "binSize": {
+				      "value": 42.0,
+				      "unit": 0
+				    }
+				  }
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"v","Entity":"vw_customer_economics"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"v"}},"Property":"tenure_days_at_churn"}}],"BinItem":{"Expression":{"Floor":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"v"}},"Property":"tenure_days_at_churn"}},"Size":42.0}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+	partition vw_customer_economics = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "saas_analytics"),
+				    public_vw_customer_economics = Source{[Schema="public",Item="vw_customer_economics"]}[Data]
+				in
+				    public_vw_customer_economics
+
+	changedProperty = Name
+

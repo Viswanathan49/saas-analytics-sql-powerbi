@@ -1,0 +1,95 @@
+table fact_revenue
+	lineageTag: f0d6b0fc-944b-4d98-a889-90476ebf37ad
+
+	column revenue_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 4da02dff-2ce5-4f50-aa36-6422eccd3091
+		summarizeBy: sum
+		sourceColumn: revenue_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column subscription_id
+		dataType: string
+		lineageTag: 4da44a94-dd77-4bb7-8ab4-8fe9944edd53
+		summarizeBy: none
+		sourceColumn: subscription_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 3334e81c-9a26-42ba-91c8-390d9c5333e9
+		summarizeBy: sum
+		sourceColumn: customer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_key
+		dataType: int64
+		formatString: 0
+		lineageTag: f10a13bb-a921-4707-8358-fd901b3bffd2
+		summarizeBy: sum
+		sourceColumn: month_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b638f807-6d56-41c8-9fdc-6005b563489f
+		summarizeBy: none
+		sourceColumn: month
+
+		variation Variation
+			isDefault
+			relationship: 8b0fa186-b886-478c-a043-f5f37aad60d6
+			defaultHierarchy: LocalDateTable_caaeb8e1-7398-40b0-8c0f-24142f88bdbc.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column monthly_fee
+		dataType: double
+		lineageTag: 04880c52-bb33-4dd3-ba7e-7ae4bd7c19c4
+		summarizeBy: sum
+		sourceColumn: monthly_fee
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column revenue_type
+		dataType: string
+		lineageTag: 1f6931d2-03ae-4e31-999f-f4cbd28c7f61
+		summarizeBy: none
+		sourceColumn: revenue_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount
+		dataType: double
+		lineageTag: e2420813-1991-400e-a7b4-9235b175f5b1
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fact_revenue = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "saas_analytics"),
+				    public_fact_revenue = Source{[Schema="public",Item="fact_revenue"]}[Data]
+				in
+				    public_fact_revenue
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+
