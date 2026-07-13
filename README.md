@@ -260,14 +260,39 @@ All measures live in the dedicated `_Measures` table (`tables/_Measures.tmdl`):
 
 ### Report Pages
 
-The report contains **four pages**, all styled with a dark background (`#0B111E`):
+The report contains **four pages**, all styled with a dark background (`#0B111E`).
 
-| Page | Display Name | Focus |
-|---|---|---|
-| 1 | **Executive Overview** | Top-level KPIs: MRR, active customers, churn rate, ARPU |
-| 2 | **Revenue & Plan Analytics** | MRR trends, plan mix breakdown, MoM growth |
-| 3 | **Churn & Retention Deep-Dive** | Churn trends by plan, churn rate vs 5% target |
-| 4 | **Customer Economics** | CAC payback, tenure at churn, acquisition cost analysis |
+---
+
+#### Page 1 — Executive Overview
+
+Top-level KPIs at a glance: Total MRR, Active Customers, Churn Rate, and ARPU. Designed as the landing page for stakeholders who want the headline numbers without digging through the details.
+
+![Executive Overview Dashboard](img/1.png)
+
+---
+
+#### Page 2 — Revenue & Plan Analytics
+
+Breaks down MRR trends over time by plan type, shows month-over-month growth (with the `MoM Growth Indicator` arrow label), and visualises plan mix distribution across the customer base.
+
+![Revenue & Plan Analytics Dashboard](img/2.png)
+
+---
+
+#### Page 3 — Churn & Retention Deep-Dive
+
+Monthly churn counts and churn rate trended over time, segmented by plan type. Includes a reference line for the 5% `Churn Target %` benchmark to quickly flag months where churn exceeded the threshold.
+
+![Churn & Retention Deep-Dive Dashboard](img/3.png)
+
+---
+
+#### Page 4 — Customer Economics
+
+Per-customer unit economics: Average CAC, CAC Payback period in months, and average tenure at churn in days. Helps evaluate the long-term profitability and sustainability of each plan segment.
+
+![Customer Economics Dashboard](img/4.png)
 
 ---
 
